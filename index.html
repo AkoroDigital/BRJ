@@ -81,6 +81,14 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;line-height:1.05;letter
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
+/* language toggle */
+.lang-toggle{display:inline-flex;border:1.5px solid var(--line);border-radius:100px;overflow:hidden;flex:none}
+.lang-toggle .lang-btn{background:transparent;border:none;padding:.5rem .8rem;cursor:pointer;font-family:'Hanken Grotesk';
+  font-weight:700;font-size:.82rem;letter-spacing:.04em;color:var(--steel);transition:.25s var(--ease)}
+.lang-toggle .lang-btn.active{background:var(--copper);color:#fff}
+.lang-toggle .lang-btn:not(.active):hover{color:var(--ink)}
+.mobile-menu .lang-toggle{margin-top:1.4rem}
+
 .hero{position:relative;background:var(--slate-deep);color:var(--bone);overflow:hidden;padding:clamp(5rem,12vw,9rem) 0 clamp(4rem,9vw,7rem)}
 .hero-bg{position:absolute;inset:0;z-index:0;opacity:.9}
 .hero-bg .glow{position:absolute;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(184,92,44,.35),transparent 65%);top:-20%;right:-15%;filter:blur(10px)}
@@ -253,6 +261,7 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 }
 @media(max-width:760px){
   .nav-links,.nav-phone{display:none}
+  .nav-cta .lang-toggle{display:none}
   .burger{display:flex}
   .mobile-menu{position:fixed;inset:78px 0 auto 0;background:var(--bone);z-index:999;border-bottom:1px solid var(--line);
     padding:1.5rem clamp(20px,5vw,48px) 2rem;transform:translateY(-120%);transition:transform .4s var(--ease);box-shadow:var(--shadow-sm)}
@@ -280,34 +289,42 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <div class="wrap nav">
     <div class="brand" data-nav="home">
       <span class="mark">BRJ</span>
-      <span><span class="bname">BRJ Home Improvement</span><span class="btag">Roofing &amp; Exteriors</span></span>
+      <span><span class="bname">BRJ Home Improvement</span><span class="btag" data-i18n="brand.tag">Roofing &amp; Exteriors</span></span>
     </div>
     <nav>
       <ul class="nav-links">
-        <li><a data-nav="home">Home</a></li>
-        <li><a data-nav="about">About</a></li>
-        <li><a data-nav="services">Services</a></li>
-        <li><a data-nav="contact">Contact</a></li>
+        <li><a data-nav="home" data-i18n="nav.home">Home</a></li>
+        <li><a data-nav="about" data-i18n="nav.about">About</a></li>
+        <li><a data-nav="services" data-i18n="nav.services">Services</a></li>
+        <li><a data-nav="contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </nav>
     <div class="nav-cta">
+      <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+        <button type="button" class="lang-btn active" data-lang="en">EN</button>
+        <button type="button" class="lang-btn" data-lang="es">ES</button>
+      </div>
       <a href="tel:+18455550142" class="nav-phone">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         (845) 555-0142
       </a>
-      <a class="btn btn-primary" data-nav="contact">Free Quote <span class="arw">→</span></a>
+      <a class="btn btn-primary" data-nav="contact"><span data-i18n="btn.free_quote">Free Quote</span> <span class="arw">→</span></a>
     </div>
     <button class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 <div class="mobile-menu">
   <ul>
-    <li><a data-nav="home">Home</a></li>
-    <li><a data-nav="about">About</a></li>
-    <li><a data-nav="services">Services</a></li>
-    <li><a data-nav="contact">Contact</a></li>
+    <li><a data-nav="home" data-i18n="nav.home">Home</a></li>
+    <li><a data-nav="about" data-i18n="nav.about">About</a></li>
+    <li><a data-nav="services" data-i18n="nav.services">Services</a></li>
+    <li><a data-nav="contact" data-i18n="nav.contact">Contact</a></li>
   </ul>
-  <a class="btn btn-primary" data-nav="contact">Get Your Free Quote →</a>
+  <a class="btn btn-primary" data-nav="contact" data-i18n="btn.get_free_quote">Get Your Free Quote →</a>
+  <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+    <button type="button" class="lang-btn active" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="es">ES</button>
+  </div>
 </div>
 
 <main>
@@ -323,22 +340,22 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <span class="since-badge reveal"><b>EST. 2005</b> Two decades of craftsmanship</span>
-          <h1 class="reveal d1">Roofing done right —<br><em>the first time.</em></h1>
-          <p class="lead reveal d2">For over twenty years, BRJ Home Improvement has protected Hudson Valley homes with expert roofing, gutters and carpentry — backed by a 100% satisfaction record.</p>
+          <span class="since-badge reveal"><b>EST. 2005</b> <span data-i18n="home.badge">Two decades of craftsmanship</span></span>
+          <h1 class="reveal d1" data-i18n="home.h1">Roofing done right —<br><em>the first time.</em></h1>
+          <p class="lead reveal d2" data-i18n="home.lead">For over twenty years, BRJ Home Improvement has protected Hudson Valley homes with expert roofing, gutters and carpentry — backed by a 100% satisfaction record.</p>
           <div class="hero-actions reveal d3">
-            <a class="btn btn-primary" data-nav="contact">Book a Free Quote <span class="arw">→</span></a>
-            <a class="btn btn-outline-light" data-nav="services">Explore Services</a>
+            <a class="btn btn-primary" data-nav="contact"><span data-i18n="btn.book_free_quote">Book a Free Quote</span> <span class="arw">→</span></a>
+            <a class="btn btn-outline-light" data-nav="services" data-i18n="btn.explore_services">Explore Services</a>
           </div>
         </div>
         <aside class="hero-card reveal d2">
           <div class="big">100%</div>
-          <div class="sub">Customer satisfaction — every project, 20 years running.</div>
+          <div class="sub" data-i18n="home.card.sub">Customer satisfaction — every project, 20 years running.</div>
           <hr>
           <ul>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Licensed, insured &amp; locally owned</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Free, no-pressure estimates</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Workmanship that lasts decades</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="home.card.li1">Licensed, insured &amp; locally owned</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="home.card.li2">Free, no-pressure estimates</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> <span data-i18n="home.card.li3">Workmanship that lasts decades</span></li>
           </ul>
         </aside>
       </div>
@@ -347,28 +364,28 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 
   <section class="stats" style="padding:0">
     <div class="wrap">
-      <div class="stat reveal"><div class="num">20+</div><div class="lab">Years in business</div></div>
-      <div class="stat reveal d1"><div class="num">100%</div><div class="lab">Satisfaction rate</div></div>
-      <div class="stat reveal d2"><div class="num">2005</div><div class="lab">Proudly serving since</div></div>
+      <div class="stat reveal"><div class="num">20+</div><div class="lab" data-i18n="stat.years">Years in business</div></div>
+      <div class="stat reveal d1"><div class="num">100%</div><div class="lab" data-i18n="stat.satisfaction">Satisfaction rate</div></div>
+      <div class="stat reveal d2"><div class="num">2005</div><div class="lab" data-i18n="stat.serving">Proudly serving since</div></div>
     </div>
   </section>
 
   <section>
     <div class="wrap split">
       <div class="body">
-        <span class="eyebrow reveal">Who we are</span>
-        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3.2rem);font-weight:600;margin-top:1rem">A trusted leader in the roofing industry.</h2>
-        <p class="reveal d2">With over two decades of experience, BRJ Home Improvement has built a solid reputation as a trusted leader in the roofing industry. Proudly serving our community since 2005, we specialize in high-quality roofing solutions tailored to the unique needs of each client.</p>
-        <p class="reveal d2">Whether it's a minor repair or a full roof replacement, our team of skilled professionals is committed to delivering exceptional craftsmanship and long-lasting results. When you choose BRJ, you're partnering with a company that treats your home like our own.</p>
-        <div class="hero-actions reveal d3" style="margin-top:2rem"><a class="btn btn-ghost" data-nav="about">Read Our Story <span class="arw">→</span></a></div>
+        <span class="eyebrow reveal" data-i18n="home.who.eyebrow">Who we are</span>
+        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3.2rem);font-weight:600;margin-top:1rem" data-i18n="home.who.h2">A trusted leader in the roofing industry.</h2>
+        <p class="reveal d2" data-i18n="home.who.p1">With over two decades of experience, BRJ Home Improvement has built a solid reputation as a trusted leader in the roofing industry. Proudly serving our community since 2005, we specialize in high-quality roofing solutions tailored to the unique needs of each client.</p>
+        <p class="reveal d2" data-i18n="home.who.p2">Whether it's a minor repair or a full roof replacement, our team of skilled professionals is committed to delivering exceptional craftsmanship and long-lasting results. When you choose BRJ, you're partnering with a company that treats your home like our own.</p>
+        <div class="hero-actions reveal d3" style="margin-top:2rem"><a class="btn btn-ghost" data-nav="about"><span data-i18n="btn.read_story">Read Our Story</span> <span class="arw">→</span></a></div>
       </div>
       <div class="reveal d2">
         <div class="media-frame tall" style="aspect-ratio:4/4.6">
           <div>
             <svg class="ph-ic" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-            <div class="ph-tx">Project photo</div>
+            <div class="ph-tx" data-i18n="ph.project">Project photo</div>
           </div>
-          <div class="badge-corner"><div class="bc-num">2005</div><div class="bc-tx">Family-owned and operated in the Hudson Valley since day one.</div></div>
+          <div class="badge-corner"><div class="bc-num">2005</div><div class="bc-tx" data-i18n="home.badge.corner">Family-owned and operated in the Hudson Valley since day one.</div></div>
         </div>
       </div>
     </div>
@@ -377,25 +394,25 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section class="values">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow center reveal">Why homeowners choose us</span>
-        <h2 class="reveal d1">Built on quality, integrity and care.</h2>
-        <p class="reveal d2">Customer satisfaction is our top priority — and it shows in everything we do.</p>
+        <span class="eyebrow center reveal" data-i18n="home.values.eyebrow">Why homeowners choose us</span>
+        <h2 class="reveal d1" data-i18n="home.values.h2">Built on quality, integrity and care.</h2>
+        <p class="reveal d2" data-i18n="home.values.p">Customer satisfaction is our top priority — and it shows in everything we do.</p>
       </div>
       <div class="cards">
         <div class="card reveal d1">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Proven Reliability</h3>
-          <p>Two decades of dependable service and a 100% satisfaction record speak for themselves.</p>
+          <h3 data-i18n="home.values.c1.h">Proven Reliability</h3>
+          <p data-i18n="home.values.c1.p">Two decades of dependable service and a 100% satisfaction record speak for themselves.</p>
         </div>
         <div class="card reveal d2">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3 3 3M5 19l3-1 9.6-9.6a2 2 0 0 0 0-2.8l-.2-.2a2 2 0 0 0-2.8 0L5 14l-1 5z"/></svg></div>
-          <h3>Exceptional Craftsmanship</h3>
-          <p>Skilled professionals delivering meticulous, long-lasting work on every single project.</p>
+          <h3 data-i18n="home.values.c2.h">Exceptional Craftsmanship</h3>
+          <p data-i18n="home.values.c2.p">Skilled professionals delivering meticulous, long-lasting work on every single project.</p>
         </div>
         <div class="card reveal d3">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Personalized Service</h3>
-          <p>Tailored solutions for the unique needs of each client — and a team that treats your home like ours.</p>
+          <h3 data-i18n="home.values.c3.h">Personalized Service</h3>
+          <p data-i18n="home.values.c3.p">Tailored solutions for the unique needs of each client — and a team that treats your home like ours.</p>
         </div>
       </div>
     </div>
@@ -404,30 +421,30 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section>
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow center reveal">What we do</span>
-        <h2 class="reveal d1">Complete roofing &amp; exterior services.</h2>
-        <p class="reveal d2">From a quick repair to a full replacement — we cover roofs, gutters, skylights and carpentry.</p>
+        <span class="eyebrow center reveal" data-i18n="home.what.eyebrow">What we do</span>
+        <h2 class="reveal d1" data-i18n="home.what.h2">Complete roofing &amp; exterior services.</h2>
+        <p class="reveal d2" data-i18n="home.what.p">From a quick repair to a full replacement — we cover roofs, gutters, skylights and carpentry.</p>
       </div>
       <div class="svc-preview">
-        <a class="svc-chip reveal d1" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg> Roof Replacement &amp; Repair</a>
-        <a class="svc-chip reveal d2" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg> New Roof Installation</a>
-        <a class="svc-chip reveal d3" data-nav="services" data-group="gutters"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg> Gutter Installation &amp; Repair</a>
-        <a class="svc-chip reveal d1" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg> Skylight Repair</a>
-        <a class="svc-chip reveal d2" data-nav="services" data-group="gutters"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14H5V6"/><path d="m9 11 2 2 4-4"/></svg> Roof &amp; Gutter Cleaning</a>
-        <a class="svc-chip reveal d3" data-nav="services" data-group="carpentry"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg> Carpentry</a>
+        <a class="svc-chip reveal d1" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg> <span data-i18n="home.chip.replace_repair">Roof Replacement &amp; Repair</span></a>
+        <a class="svc-chip reveal d2" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg> <span data-i18n="svc.new_install">New Roof Installation</span></a>
+        <a class="svc-chip reveal d3" data-nav="services" data-group="gutters"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg> <span data-i18n="home.chip.gutter_install_repair">Gutter Installation &amp; Repair</span></a>
+        <a class="svc-chip reveal d1" data-nav="services" data-group="roofing"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg> <span data-i18n="svc.skylight">Skylight Repair</span></a>
+        <a class="svc-chip reveal d2" data-nav="services" data-group="gutters"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14H5V6"/><path d="m9 11 2 2 4-4"/></svg> <span data-i18n="home.chip.roof_gutter_clean">Roof &amp; Gutter Cleaning</span></a>
+        <a class="svc-chip reveal d3" data-nav="services" data-group="carpentry"><svg class="si" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg> <span data-i18n="svc.carpentry">Carpentry</span></a>
       </div>
-      <div style="text-align:center;margin-top:2.6rem" class="reveal"><a class="btn btn-ghost" data-nav="services">View All Services <span class="arw">→</span></a></div>
+      <div style="text-align:center;margin-top:2.6rem" class="reveal"><a class="btn btn-ghost" data-nav="services"><span data-i18n="btn.view_all">View All Services</span> <span class="arw">→</span></a></div>
     </div>
   </section>
 
   <section class="cta-band">
     <span class="glow"></span>
     <div class="wrap">
-      <h2 class="reveal">Experience the difference two decades make.</h2>
-      <p class="reveal d1">Get a free, no-obligation quote from a roofing team your neighbors already trust.</p>
+      <h2 class="reveal" data-i18n="home.cta.h2">Experience the difference two decades make.</h2>
+      <p class="reveal d1" data-i18n="home.cta.p">Get a free, no-obligation quote from a roofing team your neighbors already trust.</p>
       <div class="hero-actions reveal d2">
-        <a class="btn btn-primary" data-nav="contact">Book Your Free Quote <span class="arw">→</span></a>
-        <a href="tel:+18455550142" class="btn btn-outline-light">Call (845) 555-0142</a>
+        <a class="btn btn-primary" data-nav="contact"><span data-i18n="btn.book_your_free_quote">Book Your Free Quote</span> <span class="arw">→</span></a>
+        <a href="tel:+18455550142" class="btn btn-outline-light" data-i18n="btn.call">Call (845) 555-0142</a>
       </div>
     </div>
   </section>
@@ -439,28 +456,28 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     <span class="glow"></span>
     <svg class="roofline" viewBox="0 0 1440 140" preserveAspectRatio="none" fill="none"><path d="M0 140 L0 96 L180 30 L360 96 L540 18 L720 96 L900 30 L1080 96 L1260 24 L1440 96 L1440 140 Z" fill="#11161a"/></svg>
     <div class="wrap">
-      <div class="crumbs reveal"><a data-nav="home">Home</a> &nbsp;/&nbsp; About</div>
-      <h1 class="reveal d1">Two decades of doing it the right way.</h1>
-      <p class="reveal d2">BRJ Home Improvement isn't just a roofing contractor — we're a company built on quality, integrity and a genuine respect for the homes we work on.</p>
+      <div class="crumbs reveal"><a data-nav="home" data-i18n="nav.home">Home</a> &nbsp;/&nbsp; <span data-i18n="nav.about">About</span></div>
+      <h1 class="reveal d1" data-i18n="about.h1">Two decades of doing it the right way.</h1>
+      <p class="reveal d2" data-i18n="about.intro">BRJ Home Improvement isn't just a roofing contractor — we're a company built on quality, integrity and a genuine respect for the homes we work on.</p>
     </div>
   </section>
 
   <section>
     <div class="wrap split">
       <div class="body">
-        <span class="eyebrow reveal">Our story</span>
-        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3.1rem);font-weight:600;margin-top:1rem">Trusted by our community since 2005.</h2>
-        <p class="reveal d2">With over two decades of experience, BRJ Home Improvement has built a solid reputation as a trusted leader in the roofing industry. From the very beginning, our mission has been simple: deliver high-quality roofing solutions tailored to meet the unique needs of each client.</p>
-        <p class="reveal d2">Whether it's a minor repair or a full roof replacement, our team of skilled professionals is committed to delivering exceptional craftsmanship and long-lasting results. We've earned the trust of homeowners across the Hudson Valley one roof at a time.</p>
-        <p class="reveal d3">At BRJ Home Improvement, customer satisfaction is our top priority — and it shows. We're proud to have maintained a 100% satisfaction rate over the past 20 years, thanks to our dedication to quality, integrity and personalized service.</p>
+        <span class="eyebrow reveal" data-i18n="about.story.eyebrow">Our story</span>
+        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3.1rem);font-weight:600;margin-top:1rem" data-i18n="about.story.h2">Trusted by our community since 2005.</h2>
+        <p class="reveal d2" data-i18n="about.story.p1">With over two decades of experience, BRJ Home Improvement has built a solid reputation as a trusted leader in the roofing industry. From the very beginning, our mission has been simple: deliver high-quality roofing solutions tailored to meet the unique needs of each client.</p>
+        <p class="reveal d2" data-i18n="about.story.p2">Whether it's a minor repair or a full roof replacement, our team of skilled professionals is committed to delivering exceptional craftsmanship and long-lasting results. We've earned the trust of homeowners across the Hudson Valley one roof at a time.</p>
+        <p class="reveal d3" data-i18n="about.story.p3">At BRJ Home Improvement, customer satisfaction is our top priority — and it shows. We're proud to have maintained a 100% satisfaction rate over the past 20 years, thanks to our dedication to quality, integrity and personalized service.</p>
       </div>
       <div class="reveal d2">
         <div class="media-frame tall" style="aspect-ratio:4/4.8">
           <div>
             <svg class="ph-ic" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-            <div class="ph-tx">Team / job-site photo</div>
+            <div class="ph-tx" data-i18n="ph.team">Team / job-site photo</div>
           </div>
-          <div class="badge-corner"><div class="bc-num">100%</div><div class="bc-tx">Satisfaction maintained across 20 years of work.</div></div>
+          <div class="badge-corner"><div class="bc-num">100%</div><div class="bc-tx" data-i18n="about.badge.corner">Satisfaction maintained across 20 years of work.</div></div>
         </div>
       </div>
     </div>
@@ -468,19 +485,19 @@ section{padding:clamp(4rem,9vw,7rem) 0}
 
   <section class="values">
     <div class="wrap">
-      <div class="section-head center"><span class="eyebrow center reveal">What we stand for</span><h2 class="reveal d1">The values behind every project.</h2></div>
+      <div class="section-head center"><span class="eyebrow center reveal" data-i18n="about.values.eyebrow">What we stand for</span><h2 class="reveal d1" data-i18n="about.values.h2">The values behind every project.</h2></div>
       <div class="cards">
         <div class="card reveal d1">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-          <h3>Quality</h3><p>Premium materials and meticulous workmanship that stands up to Hudson Valley weather for decades.</p>
+          <h3 data-i18n="about.val.quality.h">Quality</h3><p data-i18n="about.val.quality.p">Premium materials and meticulous workmanship that stands up to Hudson Valley weather for decades.</p>
         </div>
         <div class="card reveal d2">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Integrity</h3><p>Honest assessments, transparent pricing and no pressure — just straight answers you can trust.</p>
+          <h3 data-i18n="about.val.integrity.h">Integrity</h3><p data-i18n="about.val.integrity.p">Honest assessments, transparent pricing and no pressure — just straight answers you can trust.</p>
         </div>
         <div class="card reveal d3">
           <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-          <h3>Care</h3><p>We treat your home like our own — protecting your property and respecting your time, start to finish.</p>
+          <h3 data-i18n="about.val.care.h">Care</h3><p data-i18n="about.val.care.p">We treat your home like our own — protecting your property and respecting your time, start to finish.</p>
         </div>
       </div>
     </div>
@@ -489,16 +506,16 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section class="story">
     <div class="wrap story-grid">
       <div>
-        <span class="eyebrow reveal">Our journey</span>
-        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3rem);font-weight:600;margin-top:1rem">Decades of dependable workmanship.</h2>
-        <p class="reveal d2" style="color:var(--steel);margin-top:1.2rem">Every milestone has been built on the same promise we made in 2005 — exceptional roofing, and customers who'd recommend us to a neighbor.</p>
-        <a class="btn btn-primary reveal d3" data-nav="contact" style="margin-top:2rem">Start Your Project <span class="arw">→</span></a>
+        <span class="eyebrow reveal" data-i18n="about.journey.eyebrow">Our journey</span>
+        <h2 class="reveal d1" style="font-size:clamp(2rem,4.6vw,3rem);font-weight:600;margin-top:1rem" data-i18n="about.journey.h2">Decades of dependable workmanship.</h2>
+        <p class="reveal d2" style="color:var(--steel);margin-top:1.2rem" data-i18n="about.journey.p">Every milestone has been built on the same promise we made in 2005 — exceptional roofing, and customers who'd recommend us to a neighbor.</p>
+        <a class="btn btn-primary reveal d3" data-nav="contact" style="margin-top:2rem"><span data-i18n="btn.start_project">Start Your Project</span> <span class="arw">→</span></a>
       </div>
       <div class="timeline">
-        <div class="tl-item reveal d1"><div class="tl-year">2005</div><div class="tl-c"><h4>The beginning</h4><p>BRJ Home Improvement opens its doors, bringing trusted roofing services to local homeowners.</p></div></div>
-        <div class="tl-item reveal d2"><div class="tl-year">2010</div><div class="tl-c"><h4>Growing the craft</h4><p>Expanded into full gutter and exterior services as word-of-mouth referrals grew across the Hudson Valley.</p></div></div>
-        <div class="tl-item reveal d3"><div class="tl-year">2018</div><div class="tl-c"><h4>A reputation earned</h4><p>Recognized as a go-to local roofing specialist, known for honest work and lasting results.</p></div></div>
-        <div class="tl-item reveal d4"><div class="tl-year">Now</div><div class="tl-c"><h4>20+ years strong</h4><p>Still family-driven, still 100% satisfaction — and still treating every home like our own.</p></div></div>
+        <div class="tl-item reveal d1"><div class="tl-year">2005</div><div class="tl-c"><h4 data-i18n="about.tl1.h">The beginning</h4><p data-i18n="about.tl1.p">BRJ Home Improvement opens its doors, bringing trusted roofing services to local homeowners.</p></div></div>
+        <div class="tl-item reveal d2"><div class="tl-year">2010</div><div class="tl-c"><h4 data-i18n="about.tl2.h">Growing the craft</h4><p data-i18n="about.tl2.p">Expanded into full gutter and exterior services as word-of-mouth referrals grew across the Hudson Valley.</p></div></div>
+        <div class="tl-item reveal d3"><div class="tl-year">2018</div><div class="tl-c"><h4 data-i18n="about.tl3.h">A reputation earned</h4><p data-i18n="about.tl3.p">Recognized as a go-to local roofing specialist, known for honest work and lasting results.</p></div></div>
+        <div class="tl-item reveal d4"><div class="tl-year" data-i18n="about.tl4.year">Now</div><div class="tl-c"><h4 data-i18n="about.tl4.h">20+ years strong</h4><p data-i18n="about.tl4.p">Still family-driven, still 100% satisfaction — and still treating every home like our own.</p></div></div>
       </div>
     </div>
   </section>
@@ -506,22 +523,22 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section>
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow center reveal">Meet the founders</span>
-        <h2 class="reveal d1">The people behind BRJ.</h2>
-        <p class="reveal d2">The story of our founders is coming soon. This section is reserved for their bios, photos and the experience they bring to every roof.</p>
+        <span class="eyebrow center reveal" data-i18n="about.founders.eyebrow">Meet the founders</span>
+        <h2 class="reveal d1" data-i18n="about.founders.h2">The people behind BRJ.</h2>
+        <p class="reveal d2" data-i18n="about.founders.p">The story of our founders is coming soon. This section is reserved for their bios, photos and the experience they bring to every roof.</p>
       </div>
       <div class="founders-grid">
         <div class="founder-card reveal d1">
           <div class="founder-photo"><svg class="fp-ic" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 16 0v1"/></svg></div>
-          <div class="founder-body"><h3>Founder Name</h3><div class="role">Co-Founder</div><p>A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note">Bio coming soon</span></div>
+          <div class="founder-body"><h3 data-i18n="about.founder.name">Founder Name</h3><div class="role" data-i18n="about.founder.role">Co-Founder</div><p data-i18n="about.founder.bio">A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note" data-i18n="about.founder.note">Bio coming soon</span></div>
         </div>
         <div class="founder-card reveal d2">
           <div class="founder-photo"><svg class="fp-ic" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 16 0v1"/></svg></div>
-          <div class="founder-body"><h3>Founder Name</h3><div class="role">Co-Founder</div><p>A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note">Bio coming soon</span></div>
+          <div class="founder-body"><h3 data-i18n="about.founder.name">Founder Name</h3><div class="role" data-i18n="about.founder.role">Co-Founder</div><p data-i18n="about.founder.bio">A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note" data-i18n="about.founder.note">Bio coming soon</span></div>
         </div>
         <div class="founder-card reveal d3">
           <div class="founder-photo"><svg class="fp-ic" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 16 0v1"/></svg></div>
-          <div class="founder-body"><h3>Founder Name</h3><div class="role">Co-Founder</div><p>A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note">Bio coming soon</span></div>
+          <div class="founder-body"><h3 data-i18n="about.founder.name">Founder Name</h3><div class="role" data-i18n="about.founder.role">Co-Founder</div><p data-i18n="about.founder.bio">A short bio about this founder — their background, years in the trade and what drives their commitment to quality — will live here.</p><span class="placeholder-note" data-i18n="about.founder.note">Bio coming soon</span></div>
         </div>
       </div>
     </div>
@@ -530,9 +547,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section class="cta-band">
     <span class="glow"></span>
     <div class="wrap">
-      <h2 class="reveal">Ready to work with a team you can trust?</h2>
-      <p class="reveal d1">Two decades of excellence are one free quote away.</p>
-      <div class="hero-actions reveal d2"><a class="btn btn-primary" data-nav="contact">Book Your Free Quote <span class="arw">→</span></a><a class="btn btn-outline-light" data-nav="services">See Our Services</a></div>
+      <h2 class="reveal" data-i18n="about.cta.h2">Ready to work with a team you can trust?</h2>
+      <p class="reveal d1" data-i18n="about.cta.p">Two decades of excellence are one free quote away.</p>
+      <div class="hero-actions reveal d2"><a class="btn btn-primary" data-nav="contact"><span data-i18n="btn.book_your_free_quote">Book Your Free Quote</span> <span class="arw">→</span></a><a class="btn btn-outline-light" data-nav="services" data-i18n="btn.see_services">See Our Services</a></div>
     </div>
   </section>
 </div>
@@ -543,9 +560,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     <span class="glow"></span>
     <svg class="roofline" viewBox="0 0 1440 140" preserveAspectRatio="none" fill="none"><path d="M0 140 L0 96 L180 30 L360 96 L540 18 L720 96 L900 30 L1080 96 L1260 24 L1440 96 L1440 140 Z" fill="#11161a"/></svg>
     <div class="wrap">
-      <div class="crumbs reveal"><a data-nav="home">Home</a> &nbsp;/&nbsp; Services</div>
-      <h1 class="reveal d1">Roofing &amp; exterior services.</h1>
-      <p class="reveal d2">From minor repairs to full replacements — every service comes with the craftsmanship and care that have defined BRJ for over twenty years. Each one starts with a free quote.</p>
+      <div class="crumbs reveal"><a data-nav="home" data-i18n="nav.home">Home</a> &nbsp;/&nbsp; <span data-i18n="nav.services">Services</span></div>
+      <h1 class="reveal d1" data-i18n="services.h1">Roofing &amp; exterior services.</h1>
+      <p class="reveal d2" data-i18n="services.intro">From minor repairs to full replacements — every service comes with the craftsmanship and care that have defined BRJ for over twenty years. Each one starts with a free quote.</p>
     </div>
   </section>
 
@@ -553,32 +570,32 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     <div class="wrap">
 
       <div class="svc-group" id="group-roofing">
-        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></span><h3>Roofing Services</h3></div>
+        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></span><h3 data-i18n="services.group.roofing">Roofing Services</h3></div>
         <div class="svc-cards">
-          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg></div><h4>New Roof Installation</h4><p>Expert installation of durable, premium roofing systems built to protect your home for decades.</p><a class="quote-link js-quote" data-service="New Roof Installation">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M21 3v6h-6"/></svg></div><h4>Roof Replacement</h4><p>Full tear-off and replacement done cleanly and efficiently, with results that last and add value.</p><a class="quote-link js-quote" data-service="Roof Replacement">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="m8 14 2 2 4-4"/></svg></div><h4>Reroofing</h4><p>A cost-effective way to refresh a sound roof with a brand-new layer and extended protection.</p><a class="quote-link js-quote" data-service="Reroofing">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3 3 3M5 19l3-1 9.6-9.6a2 2 0 0 0 0-2.8l-.2-.2a2 2 0 0 0-2.8 0L5 14l-1 5z"/></svg></div><h4>Roof Repair</h4><p>Fast, reliable fixes for leaks, storm damage and worn shingles — before small problems get big.</p><a class="quote-link js-quote" data-service="Roof Repair">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14H5V6"/><path d="m9 12 2 2 4-4"/></svg></div><h4>Roof Cleaning</h4><p>Safe removal of moss, algae and debris to restore curb appeal and extend your roof's lifespan.</p><a class="quote-link js-quote" data-service="Roof Cleaning">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></div><h4>Skylight Repair</h4><p>Leak-free, weather-tight skylight repairs that protect your home and let the light back in.</p><a class="quote-link js-quote" data-service="Skylight Repair">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/></svg></div><h4 data-i18n="svc.new_install">New Roof Installation</h4><p data-i18n="svc.new_install.p">Expert installation of durable, premium roofing systems built to protect your home for decades.</p><a class="quote-link js-quote" data-service="New Roof Installation"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="M21 3v6h-6"/></svg></div><h4 data-i18n="svc.replace">Roof Replacement</h4><p data-i18n="svc.replace.p">Full tear-off and replacement done cleanly and efficiently, with results that last and add value.</p><a class="quote-link js-quote" data-service="Roof Replacement"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v10h14V10"/><path d="m8 14 2 2 4-4"/></svg></div><h4 data-i18n="svc.reroof">Reroofing</h4><p data-i18n="svc.reroof.p">A cost-effective way to refresh a sound roof with a brand-new layer and extended protection.</p><a class="quote-link js-quote" data-service="Reroofing"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3 3 3M5 19l3-1 9.6-9.6a2 2 0 0 0 0-2.8l-.2-.2a2 2 0 0 0-2.8 0L5 14l-1 5z"/></svg></div><h4 data-i18n="svc.repair">Roof Repair</h4><p data-i18n="svc.repair.p">Fast, reliable fixes for leaks, storm damage and worn shingles — before small problems get big.</p><a class="quote-link js-quote" data-service="Roof Repair"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14H5V6"/><path d="m9 12 2 2 4-4"/></svg></div><h4 data-i18n="svc.clean">Roof Cleaning</h4><p data-i18n="svc.clean.p">Safe removal of moss, algae and debris to restore curb appeal and extend your roof's lifespan.</p><a class="quote-link js-quote" data-service="Roof Cleaning"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/></svg></div><h4 data-i18n="svc.skylight">Skylight Repair</h4><p data-i18n="svc.skylight.p">Leak-free, weather-tight skylight repairs that protect your home and let the light back in.</p><a class="quote-link js-quote" data-service="Skylight Repair"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
 
       <div class="svc-group" id="group-gutters">
-        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg></span><h3>Gutter Services</h3></div>
+        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg></span><h3 data-i18n="services.group.gutters">Gutter Services</h3></div>
         <div class="svc-cards">
-          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg></div><h4>Gutter Installation</h4><p>Properly pitched, seamless gutters that channel water away and safeguard your foundation.</p><a class="quote-link js-quote" data-service="Gutter Installation">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="m9 11 2 2 4-4"/></svg></div><h4>Gutter Repair</h4><p>Sagging, leaking or detached gutters restored to full working order quickly and affordably.</p><a class="quote-link js-quote" data-service="Gutter Repair">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M21 3v5h-5"/></svg></div><h4>Gutter Replacement</h4><p>Worn-out gutters swapped for durable new systems sized and fitted to your home.</p><a class="quote-link js-quote" data-service="Gutter Replacement">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M9 18c0 1.5 1 2 1.5 2s1.5-.5 1.5-2-1.5-3-1.5-3-1.5 1.5-1.5 3z"/></svg></div><h4>Gutter Cleaning</h4><p>Thorough clearing of leaves and debris to keep water flowing and prevent costly backups.</p><a class="quote-link js-quote" data-service="Gutter Cleaning">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M12 14v7"/><path d="M9 18h6"/></svg></div><h4>Gutter Addition</h4><p>New gutter runs and downspouts added where your home needs better drainage and protection.</p><a class="quote-link js-quote" data-service="Gutter Addition">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M6 14v4"/><path d="M18 14v4"/></svg></div><h4 data-i18n="svc.gutter_install">Gutter Installation</h4><p data-i18n="svc.gutter_install.p">Properly pitched, seamless gutters that channel water away and safeguard your foundation.</p><a class="quote-link js-quote" data-service="Gutter Installation"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="m9 11 2 2 4-4"/></svg></div><h4 data-i18n="svc.gutter_repair">Gutter Repair</h4><p data-i18n="svc.gutter_repair.p">Sagging, leaking or detached gutters restored to full working order quickly and affordably.</p><a class="quote-link js-quote" data-service="Gutter Repair"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d3"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M21 3v5h-5"/></svg></div><h4 data-i18n="svc.gutter_replace">Gutter Replacement</h4><p data-i18n="svc.gutter_replace.p">Worn-out gutters swapped for durable new systems sized and fitted to your home.</p><a class="quote-link js-quote" data-service="Gutter Replacement"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M9 18c0 1.5 1 2 1.5 2s1.5-.5 1.5-2-1.5-3-1.5-3-1.5 1.5-1.5 3z"/></svg></div><h4 data-i18n="svc.gutter_clean">Gutter Cleaning</h4><p data-i18n="svc.gutter_clean.p">Thorough clearing of leaves and debris to keep water flowing and prevent costly backups.</p><a class="quote-link js-quote" data-service="Gutter Cleaning"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d2"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-1.5 6H4.5z"/><path d="M12 14v7"/><path d="M9 18h6"/></svg></div><h4 data-i18n="svc.gutter_add">Gutter Addition</h4><p data-i18n="svc.gutter_add.p">New gutter runs and downspouts added where your home needs better drainage and protection.</p><a class="quote-link js-quote" data-service="Gutter Addition"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
 
       <div class="svc-group" id="group-carpentry">
-        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg></span><h3>Additional Services</h3></div>
+        <div class="svc-group-title reveal"><span class="gi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg></span><h3 data-i18n="services.group.other">Additional Services</h3></div>
         <div class="svc-cards">
-          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg></div><h4>Carpentry</h4><p>Skilled carpentry for fascia, soffits, trim and structural repairs that complete the job right.</p><a class="quote-link js-quote" data-service="Carpentry">Book Free Quote <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="svc-card reveal d1"><div class="sc-ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 0 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h.86c.85 0 1.65.34 2.25.93l1.25 1.25"/></svg></div><h4 data-i18n="svc.carpentry">Carpentry</h4><p data-i18n="svc.carpentry.p">Skilled carpentry for fascia, soffits, trim and structural repairs that complete the job right.</p><a class="quote-link js-quote" data-service="Carpentry"><span data-i18n="quote_link">Book Free Quote</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
 
@@ -588,26 +605,26 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section class="gallery-section">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow center reveal">Our work</span>
-        <h2 class="reveal d1">Project gallery.</h2>
-        <p class="reveal d2">A look at the craftsmanship we bring to every roof and home. Photos coming soon — 15 spots reserved for completed projects.</p>
+        <span class="eyebrow center reveal" data-i18n="services.gallery.eyebrow">Our work</span>
+        <h2 class="reveal d1" data-i18n="services.gallery.h2">Project gallery.</h2>
+        <p class="reveal d2" data-i18n="services.gallery.p">A look at the craftsmanship we bring to every roof and home. Photos coming soon — 15 spots reserved for completed projects.</p>
       </div>
       <div class="gallery-grid">
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">01</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">02</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">03</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">04</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">05</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">06</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">07</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">08</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">09</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">10</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">11</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">12</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">13</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">14</div><div class="ps-tx">Photo</div></div></div>
-        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">15</div><div class="ps-tx">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">01</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">02</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">03</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">04</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">05</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">06</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">07</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">08</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">09</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">10</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">11</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">12</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">13</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">14</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
+        <div class="photo-slot reveal"><div class="ps-inner"><div class="ps-num">15</div><div class="ps-tx" data-i18n="photo">Photo</div></div></div>
       </div>
     </div>
   </section>
@@ -615,9 +632,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <section class="cta-band">
     <span class="glow"></span>
     <div class="wrap">
-      <h2 class="reveal">Not sure what you need? Just ask.</h2>
-      <p class="reveal d1">Tell us about your project and we'll provide a free, honest assessment — no pressure, ever.</p>
-      <div class="hero-actions reveal d2"><a class="btn btn-primary" data-nav="contact">Book Your Free Quote <span class="arw">→</span></a><a href="tel:+18455550142" class="btn btn-outline-light">Call (845) 555-0142</a></div>
+      <h2 class="reveal" data-i18n="services.cta.h2">Not sure what you need? Just ask.</h2>
+      <p class="reveal d1" data-i18n="services.cta.p">Tell us about your project and we'll provide a free, honest assessment — no pressure, ever.</p>
+      <div class="hero-actions reveal d2"><a class="btn btn-primary" data-nav="contact"><span data-i18n="btn.book_your_free_quote">Book Your Free Quote</span> <span class="arw">→</span></a><a href="tel:+18455550142" class="btn btn-outline-light" data-i18n="btn.call">Call (845) 555-0142</a></div>
     </div>
   </section>
 </div>
@@ -628,9 +645,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     <span class="glow"></span>
     <svg class="roofline" viewBox="0 0 1440 140" preserveAspectRatio="none" fill="none"><path d="M0 140 L0 96 L180 30 L360 96 L540 18 L720 96 L900 30 L1080 96 L1260 24 L1440 96 L1440 140 Z" fill="#11161a"/></svg>
     <div class="wrap">
-      <div class="crumbs reveal"><a data-nav="home">Home</a> &nbsp;/&nbsp; Contact</div>
-      <h1 class="reveal d1">Let's get you a free quote.</h1>
-      <p class="reveal d2">Tell us a little about your project and our team will reach out with a free, no-obligation estimate — usually within one business day.</p>
+      <div class="crumbs reveal"><a data-nav="home" data-i18n="nav.home">Home</a> &nbsp;/&nbsp; <span data-i18n="nav.contact">Contact</span></div>
+      <h1 class="reveal d1" data-i18n="contact.h1">Let's get you a free quote.</h1>
+      <p class="reveal d2" data-i18n="contact.intro">Tell us a little about your project and our team will reach out with a free, no-obligation estimate — usually within one business day.</p>
     </div>
   </section>
 
@@ -639,61 +656,61 @@ section{padding:clamp(4rem,9vw,7rem) 0}
       <div class="contact-info reveal">
         <div class="ci-item">
           <span class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-          <div><h4>Call us</h4><div class="ci-val"><a href="tel:+18455550142">(845) 555-0142</a></div><div class="ci-sub">Mon–Sat, 8am–6pm</div></div>
+          <div><h4 data-i18n="contact.call.h">Call us</h4><div class="ci-val"><a href="tel:+18455550142">(845) 555-0142</a></div><div class="ci-sub" data-i18n="contact.call.sub">Mon–Sat, 8am–6pm</div></div>
         </div>
         <div class="ci-item">
           <span class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
-          <div><h4>Email us</h4><div class="ci-val"><a href="mailto:info@brjhomeimprovement.com">info@brjhomeimprovement.com</a></div><div class="ci-sub">We reply within one business day</div></div>
+          <div><h4 data-i18n="contact.email.h">Email us</h4><div class="ci-val"><a href="mailto:info@brjhomeimprovement.com">info@brjhomeimprovement.com</a></div><div class="ci-sub" data-i18n="contact.email.sub">We reply within one business day</div></div>
         </div>
         <div class="ci-item">
           <span class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          <div><h4>Service area</h4><div class="ci-val">Wappingers Falls, NY</div><div class="ci-sub">Proudly serving the greater Hudson Valley</div></div>
+          <div><h4 data-i18n="contact.area.h">Service area</h4><div class="ci-val">Wappingers Falls, NY</div><div class="ci-sub" data-i18n="contact.area.sub">Proudly serving the greater Hudson Valley</div></div>
         </div>
         <div class="areas">
           <span class="area-chip">Wappingers Falls</span><span class="area-chip">Poughkeepsie</span><span class="area-chip">Fishkill</span>
           <span class="area-chip">Beacon</span><span class="area-chip">Hopewell Junction</span><span class="area-chip">Newburgh</span>
-          <span class="area-chip">&amp; surrounding areas</span>
+          <span class="area-chip" data-i18n="contact.area.more">&amp; surrounding areas</span>
         </div>
       </div>
 
       <div class="form-card reveal d1">
-        <h3>Request a free quote</h3>
-        <p class="fc-sub">No pressure, no obligation — just an honest estimate.</p>
-        <div class="form-success" id="formSuccess">✓ Thank you! Your request has been received. A member of our team will be in touch shortly to schedule your free quote.</div>
+        <h3 data-i18n="contact.form.h">Request a free quote</h3>
+        <p class="fc-sub" data-i18n="contact.form.sub">No pressure, no obligation — just an honest estimate.</p>
+        <div class="form-success" id="formSuccess" data-i18n="contact.form.success">✓ Thank you! Your request has been received. A member of our team will be in touch shortly to schedule your free quote.</div>
         <form id="quoteForm" novalidate>
           <div class="row-2">
-            <div class="field"><label for="name">Full name</label><input type="text" id="name" name="name" placeholder="Jane Doe" required></div>
-            <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="(845) 555-0123" required></div>
+            <div class="field"><label for="name" data-i18n="contact.form.name">Full name</label><input type="text" id="name" name="name" data-i18n-ph="contact.form.name.ph" placeholder="Jane Doe" required></div>
+            <div class="field"><label for="phone" data-i18n="contact.form.phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="(845) 555-0123" required></div>
           </div>
-          <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
+          <div class="field"><label for="email" data-i18n="contact.form.email">Email</label><input type="email" id="email" name="email" placeholder="you@example.com" required></div>
           <div class="field">
-            <label for="service">Service needed</label>
+            <label for="service" data-i18n="contact.form.service">Service needed</label>
             <select id="service" name="service">
-              <option value="" disabled selected>Select a service…</option>
-              <optgroup label="Roofing">
-                <option value="New Roof Installation">New Roof Installation</option>
-                <option value="Roof Replacement">Roof Replacement</option>
-                <option value="Reroofing">Reroofing</option>
-                <option value="Roof Repair">Roof Repair</option>
-                <option value="Roof Cleaning">Roof Cleaning</option>
-                <option value="Skylight Repair">Skylight Repair</option>
+              <option value="" disabled selected data-i18n="contact.form.service.default">Select a service…</option>
+              <optgroup label="Roofing" data-i18n-label="contact.optgroup.roofing">
+                <option value="New Roof Installation" data-i18n="svc.new_install">New Roof Installation</option>
+                <option value="Roof Replacement" data-i18n="svc.replace">Roof Replacement</option>
+                <option value="Reroofing" data-i18n="svc.reroof">Reroofing</option>
+                <option value="Roof Repair" data-i18n="svc.repair">Roof Repair</option>
+                <option value="Roof Cleaning" data-i18n="svc.clean">Roof Cleaning</option>
+                <option value="Skylight Repair" data-i18n="svc.skylight">Skylight Repair</option>
               </optgroup>
-              <optgroup label="Gutters">
-                <option value="Gutter Installation">Gutter Installation</option>
-                <option value="Gutter Repair">Gutter Repair</option>
-                <option value="Gutter Replacement">Gutter Replacement</option>
-                <option value="Gutter Cleaning">Gutter Cleaning</option>
-                <option value="Gutter Addition">Gutter Addition</option>
+              <optgroup label="Gutters" data-i18n-label="contact.optgroup.gutters">
+                <option value="Gutter Installation" data-i18n="svc.gutter_install">Gutter Installation</option>
+                <option value="Gutter Repair" data-i18n="svc.gutter_repair">Gutter Repair</option>
+                <option value="Gutter Replacement" data-i18n="svc.gutter_replace">Gutter Replacement</option>
+                <option value="Gutter Cleaning" data-i18n="svc.gutter_clean">Gutter Cleaning</option>
+                <option value="Gutter Addition" data-i18n="svc.gutter_add">Gutter Addition</option>
               </optgroup>
-              <optgroup label="Other">
-                <option value="Carpentry">Carpentry</option>
-                <option value="Other / Not sure">Other / Not sure</option>
+              <optgroup label="Other" data-i18n-label="contact.optgroup.other">
+                <option value="Carpentry" data-i18n="svc.carpentry">Carpentry</option>
+                <option value="Other / Not sure" data-i18n="contact.option.other">Other / Not sure</option>
               </optgroup>
             </select>
           </div>
-          <div class="field"><label for="message">Project details</label><textarea id="message" name="message" placeholder="Tell us about your roof, the issue you're seeing, your timeline, and anything else that helps."></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send My Free Quote Request <span class="arw">→</span></button>
-          <p class="form-note">Prefer to talk? Call us anytime at (845) 555-0142.</p>
+          <div class="field"><label for="message" data-i18n="contact.form.details">Project details</label><textarea id="message" name="message" data-i18n-ph="contact.form.details.ph" placeholder="Tell us about your roof, the issue you're seeing, your timeline, and anything else that helps."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"><span data-i18n="contact.form.submit">Send My Free Quote Request</span> <span class="arw">→</span></button>
+          <p class="form-note" data-i18n="contact.form.note">Prefer to talk? Call us anytime at (845) 555-0142.</p>
         </form>
       </div>
     </div>
@@ -707,19 +724,251 @@ section{padding:clamp(4rem,9vw,7rem) 0}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-about">
-        <div class="brand" data-nav="home"><span class="mark">BRJ</span><span><span class="bname" style="color:var(--bone)">BRJ Home Improvement</span><span class="btag">Roofing &amp; Exteriors</span></span></div>
-        <p>Trusted roofing, gutters and carpentry across the Hudson Valley since 2005. Quality, integrity and personalized service — every project.</p>
+        <div class="brand" data-nav="home"><span class="mark">BRJ</span><span><span class="bname" style="color:var(--bone)">BRJ Home Improvement</span><span class="btag" data-i18n="brand.tag">Roofing &amp; Exteriors</span></span></div>
+        <p data-i18n="footer.about">Trusted roofing, gutters and carpentry across the Hudson Valley since 2005. Quality, integrity and personalized service — every project.</p>
       </div>
-      <div><h4>Explore</h4><ul><li><a data-nav="home">Home</a></li><li><a data-nav="about">About Us</a></li><li><a data-nav="services">Services</a></li><li><a data-nav="contact">Free Quote</a></li></ul></div>
-      <div><h4>Services</h4><ul><li><a data-nav="services" data-group="roofing">Roof Replacement</a></li><li><a data-nav="services" data-group="roofing">Roof Repair</a></li><li><a data-nav="services" data-group="gutters">Gutter Installation</a></li><li><a data-nav="services" data-group="carpentry">Carpentry</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li><a href="tel:+18455550142" class="ph">(845) 555-0142</a></li><li><a href="mailto:info@brjhomeimprovement.com">info@brjhomeimprovement.com</a></li><li>Wappingers Falls, NY</li><li>Serving the Hudson Valley</li></ul></div>
+      <div><h4 data-i18n="footer.explore">Explore</h4><ul><li><a data-nav="home" data-i18n="nav.home">Home</a></li><li><a data-nav="about" data-i18n="footer.about_us">About Us</a></li><li><a data-nav="services" data-i18n="nav.services">Services</a></li><li><a data-nav="contact" data-i18n="footer.free_quote">Free Quote</a></li></ul></div>
+      <div><h4 data-i18n="nav.services">Services</h4><ul><li><a data-nav="services" data-group="roofing" data-i18n="svc.replace">Roof Replacement</a></li><li><a data-nav="services" data-group="roofing" data-i18n="svc.repair">Roof Repair</a></li><li><a data-nav="services" data-group="gutters" data-i18n="svc.gutter_install">Gutter Installation</a></li><li><a data-nav="services" data-group="carpentry" data-i18n="svc.carpentry">Carpentry</a></li></ul></div>
+      <div><h4 data-i18n="nav.contact">Contact</h4><ul><li><a href="tel:+18455550142" class="ph">(845) 555-0142</a></li><li><a href="mailto:info@brjhomeimprovement.com">info@brjhomeimprovement.com</a></li><li>Wappingers Falls, NY</li><li data-i18n="footer.serving">Serving the Hudson Valley</li></ul></div>
     </div>
-    <div class="footer-bottom"><span>© 2025 BRJ Home Improvement. All rights reserved.</span><span>Licensed &amp; Insured · Family-Owned</span></div>
+    <div class="footer-bottom"><span data-i18n="footer.copyright">© 2025 BRJ Home Improvement. All rights reserved.</span><span data-i18n="footer.licensed">Licensed &amp; Insured · Family-Owned</span></div>
   </div>
 </footer>
 
 <script>
 (function(){
+  /* ============ i18n: Spanish dictionary ============
+     English is read straight from the page on load (enCache),
+     so only the Spanish strings live here. */
+  var ES = {
+    "brand.tag":"Techos y Exteriores",
+    "nav.home":"Inicio","nav.about":"Nosotros","nav.services":"Servicios","nav.contact":"Contacto",
+    "btn.free_quote":"Presupuesto Gratis",
+    "btn.get_free_quote":"Obtenga su presupuesto gratis →",
+    "btn.book_free_quote":"Solicite un presupuesto gratis",
+    "btn.explore_services":"Ver servicios",
+    "btn.read_story":"Conozca nuestra historia",
+    "btn.view_all":"Ver todos los servicios",
+    "btn.book_your_free_quote":"Solicite su presupuesto gratis",
+    "btn.call":"Llame al (845) 555-0142",
+    "btn.start_project":"Comience su proyecto",
+    "btn.see_services":"Vea nuestros servicios",
+
+    "home.badge":"Dos décadas de buen oficio",
+    "home.h1":"Techos bien hechos —<br><em>a la primera.</em>",
+    "home.lead":"Por más de veinte años, BRJ Home Improvement ha protegido los hogares del Valle del Hudson con techado, canaletas y carpintería de expertos — respaldados por un récord de 100% de satisfacción.",
+    "home.card.sub":"Satisfacción del cliente — cada proyecto, durante 20 años.",
+    "home.card.li1":"Con licencia, asegurados y de propiedad local",
+    "home.card.li2":"Estimados gratis y sin compromiso",
+    "home.card.li3":"Trabajo que dura décadas",
+
+    "stat.years":"Años en el negocio",
+    "stat.satisfaction":"Índice de satisfacción",
+    "stat.serving":"Sirviendo con orgullo desde",
+
+    "home.who.eyebrow":"Quiénes somos",
+    "home.who.h2":"Un líder de confianza en la industria del techado.",
+    "home.who.p1":"Con más de dos décadas de experiencia, BRJ Home Improvement ha construido una sólida reputación como líder de confianza en la industria del techado. Sirviendo con orgullo a nuestra comunidad desde 2005, nos especializamos en soluciones de techado de alta calidad adaptadas a las necesidades únicas de cada cliente.",
+    "home.who.p2":"Ya sea una reparación menor o el reemplazo completo del techo, nuestro equipo de profesionales calificados se compromete a brindar una mano de obra excepcional y resultados duraderos. Cuando elige a BRJ, se asocia con una empresa que trata su hogar como si fuera el nuestro.",
+    "ph.project":"Foto del proyecto",
+    "home.badge.corner":"De propiedad y operación familiar en el Valle del Hudson desde el primer día.",
+
+    "home.values.eyebrow":"Por qué nos eligen los propietarios",
+    "home.values.h2":"Basados en calidad, integridad y dedicación.",
+    "home.values.p":"La satisfacción del cliente es nuestra prioridad — y se nota en todo lo que hacemos.",
+    "home.values.c1.h":"Confiabilidad comprobada",
+    "home.values.c1.p":"Dos décadas de servicio confiable y un récord de 100% de satisfacción hablan por sí solos.",
+    "home.values.c2.h":"Mano de obra excepcional",
+    "home.values.c2.p":"Profesionales calificados que brindan un trabajo meticuloso y duradero en cada proyecto.",
+    "home.values.c3.h":"Servicio personalizado",
+    "home.values.c3.p":"Soluciones a la medida para las necesidades únicas de cada cliente — y un equipo que trata su hogar como el nuestro.",
+
+    "home.what.eyebrow":"Lo que hacemos",
+    "home.what.h2":"Servicios completos de techado y exteriores.",
+    "home.what.p":"Desde una reparación rápida hasta un reemplazo completo — cubrimos techos, canaletas, tragaluces y carpintería.",
+    "home.chip.replace_repair":"Reemplazo y reparación de techos",
+    "home.chip.gutter_install_repair":"Instalación y reparación de canaletas",
+    "home.chip.roof_gutter_clean":"Limpieza de techos y canaletas",
+
+    "home.cta.h2":"Descubra la diferencia que hacen dos décadas.",
+    "home.cta.p":"Obtenga un presupuesto gratis y sin compromiso de un equipo de techadores en quien sus vecinos ya confían.",
+
+    "about.h1":"Dos décadas haciéndolo de la manera correcta.",
+    "about.intro":"BRJ Home Improvement no es solo un contratista de techos — somos una empresa basada en la calidad, la integridad y un respeto genuino por los hogares en los que trabajamos.",
+    "about.story.eyebrow":"Nuestra historia",
+    "about.story.h2":"La confianza de nuestra comunidad desde 2005.",
+    "about.story.p1":"Con más de dos décadas de experiencia, BRJ Home Improvement ha construido una sólida reputación como líder de confianza en la industria del techado. Desde el principio, nuestra misión ha sido sencilla: brindar soluciones de techado de alta calidad adaptadas a las necesidades únicas de cada cliente.",
+    "about.story.p2":"Ya sea una reparación menor o el reemplazo completo del techo, nuestro equipo de profesionales calificados se compromete a brindar una mano de obra excepcional y resultados duraderos. Nos hemos ganado la confianza de los propietarios de todo el Valle del Hudson, un techo a la vez.",
+    "about.story.p3":"En BRJ Home Improvement, la satisfacción del cliente es nuestra prioridad — y se nota. Nos enorgullece haber mantenido un índice de satisfacción del 100% durante los últimos 20 años, gracias a nuestra dedicación a la calidad, la integridad y el servicio personalizado.",
+    "ph.team":"Foto del equipo / obra",
+    "about.badge.corner":"Satisfacción mantenida a lo largo de 20 años de trabajo.",
+
+    "about.values.eyebrow":"Lo que representamos",
+    "about.values.h2":"Los valores detrás de cada proyecto.",
+    "about.val.quality.h":"Calidad",
+    "about.val.quality.p":"Materiales de primera y una mano de obra meticulosa que resiste el clima del Valle del Hudson por décadas.",
+    "about.val.integrity.h":"Integridad",
+    "about.val.integrity.p":"Evaluaciones honestas, precios transparentes y sin presión — solo respuestas claras en las que puede confiar.",
+    "about.val.care.h":"Dedicación",
+    "about.val.care.p":"Tratamos su hogar como el nuestro — protegiendo su propiedad y respetando su tiempo, de principio a fin.",
+
+    "about.journey.eyebrow":"Nuestro recorrido",
+    "about.journey.h2":"Décadas de trabajo confiable.",
+    "about.journey.p":"Cada logro se ha construido sobre la misma promesa que hicimos en 2005 — un techado excepcional y clientes que nos recomendarían a un vecino.",
+    "about.tl1.h":"El comienzo",
+    "about.tl1.p":"BRJ Home Improvement abre sus puertas, ofreciendo servicios de techado confiables a los propietarios locales.",
+    "about.tl2.h":"Creciendo en el oficio",
+    "about.tl2.p":"Ampliamos a servicios completos de canaletas y exteriores a medida que las recomendaciones de boca en boca crecían por todo el Valle del Hudson.",
+    "about.tl3.h":"Una reputación ganada",
+    "about.tl3.p":"Reconocidos como el especialista local de referencia en techos, conocidos por el trabajo honesto y los resultados duraderos.",
+    "about.tl4.year":"Hoy",
+    "about.tl4.h":"Más de 20 años fuertes",
+    "about.tl4.p":"Seguimos siendo una empresa familiar, seguimos con 100% de satisfacción — y seguimos tratando cada hogar como el nuestro.",
+
+    "about.founders.eyebrow":"Conozca a los fundadores",
+    "about.founders.h2":"Las personas detrás de BRJ.",
+    "about.founders.p":"La historia de nuestros fundadores estará disponible pronto. Esta sección está reservada para sus biografías, fotos y la experiencia que aportan a cada techo.",
+    "about.founder.name":"Nombre del fundador",
+    "about.founder.role":"Cofundador",
+    "about.founder.bio":"Aquí irá una breve biografía de este fundador: su trayectoria, sus años en el oficio y lo que impulsa su compromiso con la calidad.",
+    "about.founder.note":"Biografía próximamente",
+
+    "about.cta.h2":"¿Listo para trabajar con un equipo en el que puede confiar?",
+    "about.cta.p":"Dos décadas de excelencia están a un presupuesto gratis de distancia.",
+
+    "services.h1":"Servicios de techado y exteriores.",
+    "services.intro":"Desde reparaciones menores hasta reemplazos completos — cada servicio viene con la mano de obra y la dedicación que han definido a BRJ por más de veinte años. Cada uno comienza con un presupuesto gratis.",
+    "services.group.roofing":"Servicios de techado",
+    "services.group.gutters":"Servicios de canaletas",
+    "services.group.other":"Servicios adicionales",
+
+    "quote_link":"Presupuesto gratis",
+
+    "svc.new_install":"Instalación de techo nuevo",
+    "svc.new_install.p":"Instalación experta de sistemas de techado duraderos y de primera calidad, hechos para proteger su hogar por décadas.",
+    "svc.replace":"Reemplazo de techo",
+    "svc.replace.p":"Remoción y reemplazo completo, realizado de forma limpia y eficiente, con resultados que perduran y agregan valor.",
+    "svc.reroof":"Recubrimiento de techo",
+    "svc.reroof.p":"Una forma económica de renovar un techo en buen estado con una capa nueva y mayor protección.",
+    "svc.repair":"Reparación de techo",
+    "svc.repair.p":"Soluciones rápidas y confiables para goteras, daños por tormentas y tejas desgastadas — antes de que los problemas pequeños se agranden.",
+    "svc.clean":"Limpieza de techo",
+    "svc.clean.p":"Eliminación segura de musgo, algas y escombros para restaurar la apariencia y extender la vida útil de su techo.",
+    "svc.skylight":"Reparación de tragaluces",
+    "svc.skylight.p":"Reparaciones de tragaluces sin goteras y herméticas que protegen su hogar y dejan entrar la luz de nuevo.",
+
+    "svc.gutter_install":"Instalación de canaletas",
+    "svc.gutter_install.p":"Canaletas sin costuras y con la inclinación adecuada que desvían el agua y protegen sus cimientos.",
+    "svc.gutter_repair":"Reparación de canaletas",
+    "svc.gutter_repair.p":"Canaletas hundidas, con goteras o sueltas restauradas a su pleno funcionamiento de forma rápida y económica.",
+    "svc.gutter_replace":"Reemplazo de canaletas",
+    "svc.gutter_replace.p":"Canaletas desgastadas reemplazadas por sistemas nuevos y duraderos, medidos y ajustados a su hogar.",
+    "svc.gutter_clean":"Limpieza de canaletas",
+    "svc.gutter_clean.p":"Limpieza a fondo de hojas y escombros para mantener el flujo del agua y evitar obstrucciones costosas.",
+    "svc.gutter_add":"Adición de canaletas",
+    "svc.gutter_add.p":"Nuevas líneas de canaletas y bajantes instaladas donde su hogar necesita mejor drenaje y protección.",
+
+    "svc.carpentry":"Carpintería",
+    "svc.carpentry.p":"Carpintería calificada para fascias, sofitos, molduras y reparaciones estructurales que completan el trabajo correctamente.",
+
+    "services.gallery.eyebrow":"Nuestro trabajo",
+    "services.gallery.h2":"Galería de proyectos.",
+    "services.gallery.p":"Un vistazo a la mano de obra que aportamos a cada techo y hogar. Fotos próximamente — 15 espacios reservados para proyectos terminados.",
+    "photo":"Foto",
+    "services.cta.h2":"¿No está seguro de lo que necesita? Solo pregunte.",
+    "services.cta.p":"Cuéntenos sobre su proyecto y le daremos una evaluación gratis y honesta — nunca con presión.",
+
+    "contact.h1":"Consigamos su presupuesto gratis.",
+    "contact.intro":"Cuéntenos un poco sobre su proyecto y nuestro equipo se comunicará con un estimado gratis y sin compromiso — generalmente dentro de un día hábil.",
+    "contact.call.h":"Llámenos",
+    "contact.call.sub":"Lun–Sáb, 8am–6pm",
+    "contact.email.h":"Escríbanos",
+    "contact.email.sub":"Respondemos dentro de un día hábil",
+    "contact.area.h":"Área de servicio",
+    "contact.area.sub":"Sirviendo con orgullo a todo el Valle del Hudson",
+    "contact.area.more":"y áreas cercanas",
+    "contact.form.h":"Solicite un presupuesto gratis",
+    "contact.form.sub":"Sin presión, sin compromiso — solo un estimado honesto.",
+    "contact.form.success":"✓ ¡Gracias! Hemos recibido su solicitud. Un miembro de nuestro equipo se comunicará pronto para programar su presupuesto gratis.",
+    "contact.form.name":"Nombre completo",
+    "contact.form.name.ph":"Juan Pérez",
+    "contact.form.phone":"Teléfono",
+    "contact.form.email":"Correo electrónico",
+    "contact.form.service":"Servicio que necesita",
+    "contact.form.service.default":"Seleccione un servicio…",
+    "contact.optgroup.roofing":"Techado",
+    "contact.optgroup.gutters":"Canaletas",
+    "contact.optgroup.other":"Otro",
+    "contact.option.other":"Otro / No estoy seguro",
+    "contact.form.details":"Detalles del proyecto",
+    "contact.form.details.ph":"Cuéntenos sobre su techo, el problema que observa, su plazo de tiempo y cualquier otra cosa que ayude.",
+    "contact.form.submit":"Enviar mi solicitud de presupuesto",
+    "contact.form.note":"¿Prefiere hablar? Llámenos cuando quiera al (845) 555-0142.",
+
+    "footer.about":"Techado, canaletas y carpintería de confianza en todo el Valle del Hudson desde 2005. Calidad, integridad y servicio personalizado — en cada proyecto.",
+    "footer.explore":"Explorar",
+    "footer.about_us":"Nosotros",
+    "footer.free_quote":"Presupuesto gratis",
+    "footer.serving":"Sirviendo al Valle del Hudson",
+    "footer.copyright":"© 2025 BRJ Home Improvement. Todos los derechos reservados.",
+    "footer.licensed":"Con licencia y asegurados · Empresa familiar"
+  };
+
+  var PAGE_TITLE = {
+    en:"BRJ Home Improvement — Trusted Roofing in the Hudson Valley Since 2005",
+    es:"BRJ Home Improvement — Techado de confianza en el Valle del Hudson desde 2005"
+  };
+  var PREFILL_BASE = {
+    en:"I\u2019d like a free quote for: ",
+    es:"Quisiera un presupuesto gratis para: "
+  };
+
+  var currentLang = 'en';
+  var enCache = {};       // cached English innerHTML, keyed by data-i18n
+  var enLabelCache = {};  // cached English optgroup labels
+  var enPhCache = {};     // cached English placeholders
+
+  function cacheEnglish(){
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(!(k in enCache)) enCache[k] = el.innerHTML;
+    });
+    document.querySelectorAll('[data-i18n-label]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-label');
+      if(!(k in enLabelCache)) enLabelCache[k] = el.getAttribute('label');
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-ph');
+      if(!(k in enPhCache)) enPhCache[k] = el.getAttribute('placeholder');
+    });
+  }
+
+  function setLang(lang){
+    if(lang!=='es') lang='en';
+    currentLang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      var val = (lang==='es') ? ES[k] : enCache[k];
+      if(val!=null) el.innerHTML = val;
+    });
+    document.querySelectorAll('[data-i18n-label]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-label');
+      var val = (lang==='es') ? ES[k] : enLabelCache[k];
+      if(val!=null) el.setAttribute('label', val);
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-ph');
+      var val = (lang==='es') ? ES[k] : enPhCache[k];
+      if(val!=null) el.setAttribute('placeholder', val);
+    });
+    document.documentElement.lang = lang;
+    if(PAGE_TITLE[lang]) document.title = PAGE_TITLE[lang];
+    document.querySelectorAll('.lang-toggle .lang-btn').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+    });
+  }
+
+  /* ============ page routing ============ */
   var PAGES = ['home','about','services','contact'];
   var pageEls = {};
   PAGES.forEach(function(p){ pageEls[p] = document.getElementById('page-'+p); });
@@ -742,8 +991,6 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     opts = opts || {};
     PAGES.forEach(function(p){ pageEls[p].classList.toggle('active', p===page); });
     setActiveNav(page);
-    // Update the URL hash where allowed. Wrapped in try/catch because
-    // sandboxed previews (about:srcdoc) block history changes.
     try{
       if(('#'+page) !== window.location.hash){
         history.replaceState(null, '', '#'+page);
@@ -752,12 +999,10 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     if(!opts.keepScroll){ window.scrollTo({top:0, behavior:'auto'}); }
     playReveals(pageEls[page]);
 
-    // optional scroll to a service group
     if(opts.group){
       var g = document.getElementById('group-'+opts.group);
       if(g){ setTimeout(function(){ g.scrollIntoView({behavior:'smooth', block:'start'}); }, 120); }
     }
-    // contact prefill
     if(page === 'contact' && opts.service){ prefillService(opts.service); }
   }
 
@@ -773,13 +1018,19 @@ section{padding:clamp(4rem,9vw,7rem) 0}
       o.value = svc; o.textContent = svc; o.selected = true; field.appendChild(o);
     }
     var msg = document.getElementById('message');
-    if(msg){ msg.value = 'I\u2019d like a free quote for: ' + svc + '.\n\n'; }
+    if(msg){ msg.value = (PREFILL_BASE[currentLang]||PREFILL_BASE.en) + svc + '.\n\n'; }
     var card = document.querySelector('#page-contact .form-card');
     if(card){ setTimeout(function(){ card.scrollIntoView({behavior:'smooth', block:'center'}); }, 200); }
   }
 
-  // Nav clicks (header, footer, buttons, chips)
+  /* Clicks: nav, quote links, language buttons */
   document.addEventListener('click', function(e){
+    var langBtn = e.target.closest('.lang-btn');
+    if(langBtn){
+      setLang(langBtn.getAttribute('data-lang'));
+      closeMobileMenu();
+      return;
+    }
     var navEl = e.target.closest('[data-nav]');
     if(navEl){
       e.preventDefault();
@@ -798,7 +1049,7 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     }
   });
 
-  // Mobile menu
+  /* Mobile menu */
   var burger = document.querySelector('.burger');
   var menu = document.querySelector('.mobile-menu');
   function closeMobileMenu(){ if(burger&&menu){ burger.classList.remove('open'); menu.classList.remove('open'); } }
@@ -806,13 +1057,13 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     burger.addEventListener('click', function(){ burger.classList.toggle('open'); menu.classList.toggle('open'); });
   }
 
-  // Back/forward
+  /* Back/forward */
   window.addEventListener('popstate', function(){
     var page = (window.location.hash || '#home').replace('#','');
     showPage(page, {keepScroll:true});
   });
 
-  // Contact form demo submit
+  /* Contact form demo submit */
   var form = document.getElementById('quoteForm');
   if(form){
     form.addEventListener('submit', function(e){
@@ -823,7 +1074,9 @@ section{padding:clamp(4rem,9vw,7rem) 0}
     });
   }
 
-  // Initial route
+  /* Initial setup */
+  cacheEnglish();
+  setLang('en');
   var start = (window.location.hash || '#home').replace('#','');
   showPage(PAGES.indexOf(start)!==-1 ? start : 'home', {keepScroll:true});
 })();
